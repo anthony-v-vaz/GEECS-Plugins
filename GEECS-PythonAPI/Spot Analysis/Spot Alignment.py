@@ -341,8 +341,8 @@ class Alignment:
         reorder = []
         reorder.append(self.all_files[1])
         reorder.append(self.all_files[0])
-        for item in reorder:
-            print(item)
+        # for item in reorder:
+        #     print(item)
         time.sleep(0.5)
 
         if len(folders) >= 3:
@@ -437,19 +437,19 @@ class Alignment:
             print("all best results:")
             print("-----------------------")
             for item in reorder:
-                print(item)
+                print(os.path.basename(item[0]), os.path.basename(item[0]))
             print("-----------------------\n")
             time.sleep(0.5)
-            print("\n")
+            # print("\n")
         else:
             self.reorder = reorder
             print("all best results:")
             print("-----------------------")
             for item in reorder:
-                print(item)
+                print(os.path.basename(item[0]), os.path.basename(item[0]))
             print("-----------------------")
             time.sleep(0.5)
-            print("\n")
+            # print("\n")
 
     #####################################################################################
 
@@ -779,7 +779,7 @@ class Alignment:
                 #here the first folder has the name of test image, result image, result, and (dx,dy) to center
                 #good up to here, dict is made with scans of first folder and their ROI coords
                 list_of_data = self.reorder
-                print(list_of_data)
+                # print(list_of_data)
                 list_of_data = [
                     (t[0], os.path.join(os.path.dirname(os.path.split(t[1])[0]), os.path.split(t[1])[1]), t[2], t[3], t[4], t[5], t[6], t[7], t[8])
                     for t in list_of_data
@@ -788,8 +788,8 @@ class Alignment:
                 temp = self.first_temp
 
                 original_files = [item[1] for item in list_of_data]
-                for item in original_files:
-                    print(item)
+                # for item in original_files:
+                #     print(item)
                 self.processed = "Best images"
                 self.best_folder = self.current_path / self.processed
                 # print(self.bkg_path)
@@ -823,9 +823,9 @@ class Alignment:
             self.image_rmv_bkg(original_files, bkg_image)
             # print("using image")
         print("--------------------------------------")
-        for filename in self.final_image_arrays.keys():
-            print("final images to be used:", filename)
-        print("--------------------------------------")
+        # for filename in self.final_image_arrays.keys():
+        #     print("final images to be used:", filename)
+        # print("--------------------------------------")
         time.sleep(0.5)
         print("\nBeginning centering...\n")
         EF_loop = []
