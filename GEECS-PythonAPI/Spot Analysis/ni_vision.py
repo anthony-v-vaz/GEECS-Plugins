@@ -26,11 +26,10 @@ def read_imaq_image(file_path: Union[Path, str]) -> Optional[np.ndarray]:
         return image
 
 
-def read_png_header(file_path: Path) -> dict[bytes, bytes]:
+def read_png_header(file_path: Path) -> dict:
     try:
         png_reader = png.Reader(str(file_path))
         return {key: val for key, val in png_reader.chunks() if key != b'IDAT'}
 
     except Exception:
         return {}
-

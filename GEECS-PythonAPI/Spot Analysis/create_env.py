@@ -1,13 +1,16 @@
 import subprocess
 import sys
+import os
 import venv
+
 
 def create_virtual_environment(env_name):
     venv.create(env_name, with_pip=True)
 
 
 def install_packages(env_name, requirements_file):
-    subprocess.call([f"{env_name}/bin/pip", "install", "-r", requirements_file])
+    pip_path = os.path.join(env_name, "Scripts" if os.name == "nt" else "bin", "pip")
+    subprocess.call([pip_path, "install", "-r", requirements_file])
 
 
 def main():

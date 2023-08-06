@@ -12,11 +12,7 @@ from PIL import Image
 import os
 from pathlib import Path
 from skimage import io
-import shutil
-import pandas as pd
 from scipy.signal import savgol_filter
-import png
-from typing import Optional, Union
 import sys
 from tkinter import Tk, filedialog
 import time
@@ -597,7 +593,11 @@ class Alignment:
             max_count = np.max(bkg_sub_img)
             n_bottom_rows = -10
             bkg_avg = np.mean(bkg_sub_img[n_bottom_rows:, :], axis=0)
-            bkg = savgol_filter(bkg_avg, max(int(len(bkg_avg) / 6), 2), 3)
+            window_length = max(int(len(bkg_avg) / 3), 2)
+            if window_length % 2 == 0:
+                window_length += 1
+
+            bkg = savgol_filter(bkg_avg, window_length, 3)
             bkg_sub_img = (bkg_sub_img - bkg)
             # Subtract background
             bkg_sub_img[np.where(bkg_sub_img > max_count)] = max_count
@@ -699,7 +699,11 @@ class Alignment:
 
             n_bottom_rows = -60
             bkg_avg = np.mean(bkg_sub_img[n_bottom_rows:, :], axis=0)
-            bkg = savgol_filter(bkg_avg, max(int(len(bkg_avg) / 3), 2), 3)
+            window_length = max(int(len(bkg_avg) / 3), 2)
+            if window_length % 2 == 0:
+                window_length += 1
+
+            bkg = savgol_filter(bkg_avg, window_length, 3)
             bkg_sub_img = (bkg_sub_img - bkg)
             # Subtract background
 
