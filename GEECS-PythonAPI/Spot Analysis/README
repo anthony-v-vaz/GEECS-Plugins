@@ -1,1 +1,1 @@
-"test"
+run this in terminal/cmd: python create_env.py myenv requirements.txt
