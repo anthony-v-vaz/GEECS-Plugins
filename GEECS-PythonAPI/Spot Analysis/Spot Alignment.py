@@ -713,7 +713,7 @@ class Alignment:
             bkg_sub_img = max_count / (np.max(bkg_sub_img) - np.min(bkg_sub_img)) * (bkg_sub_img - np.min(bkg_sub_img))
             bkg_sub_img *= 1
             bkg_sub_img[np.where(bkg_sub_img > max_count)] = max_count
-            # bkg_sub_img[np.where(bkg_sub_img >= 0.8 * max_count)] = 0
+            bkg_sub_img[np.where(bkg_sub_img >= 0.8 * max_count)] = 0
             bkg_sub_img = bkg_sub_img.astype(np.int32)
             # Use the original filename as the base name for the binary file
             # sub_bkg_filename = f'{filename}'
@@ -733,7 +733,7 @@ class Alignment:
         self.results = []
         for file_path in folder:
             image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
-            mask = cv2.inRange(image, 0, 254)  # 80%
+            mask = cv2.inRange(image, 0, 204)  # 80%
             template = cv2.imread(initial_template, cv2.IMREAD_GRAYSCALE)
             w = template.shape[1]
             h = template.shape[0]
